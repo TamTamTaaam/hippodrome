@@ -1,34 +1,33 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.powermock.api.mockito.PowerMockito;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class HippodromeTest {
+    private final String HORSES_CANNOT_BE_NULL = "Horses cannot be null.";
+    private final String HORSES_CANNOT_BE_EMPTY = "Horses cannot be empty.";
+
    @Test
-    public void HippodromeConstructorTest() {
+    public void hippodromeConstructorTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
             Hippodrome myObject = new Hippodrome(null);
-            throw new IllegalArgumentException("Horses cannot be null.");
+            throw new IllegalArgumentException(HORSES_CANNOT_BE_NULL);
         });
-        assertEquals("Horses cannot be null.", exception.getMessage());
+        assertEquals(HORSES_CANNOT_BE_NULL, exception.getMessage());
     }
     @Test
-    public void HippodromeConstructorListTest() {
+    public void hippodromeConstructorListTest() {
         List<Horse> horsesListTest = new ArrayList<>();
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
             Hippodrome myObject = new Hippodrome(horsesListTest);
-            throw new IllegalArgumentException("Horses cannot be empty.");
+            throw new IllegalArgumentException(HORSES_CANNOT_BE_EMPTY);
         });
-        assertEquals("Horses cannot be empty.", exception.getMessage());
+        assertEquals(HORSES_CANNOT_BE_EMPTY, exception.getMessage());
     }
     @Test
     public void getHorsesTest() {
@@ -48,9 +47,7 @@ public class HippodromeTest {
             mockHorses.add(Mockito.spy(new Horse("name", i, i)));
         }
         Hippodrome hippodromeTest = new Hippodrome(mockHorses);
-        verify(hippodromeTest, times(50)).move();
-
-        for (Horse horse : mockHorses) {
+        for (Horse horse : hippodromeTest.getHorses()) {
             verify(horse).move();
         }
 

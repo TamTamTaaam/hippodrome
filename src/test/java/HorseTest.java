@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,6 +5,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.lang.reflect.Field;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mockStatic;
@@ -15,63 +17,60 @@ public class HorseTest {
 private final String NAME_CANNOT_BE_NULL = "Name cannot be null.";
 private final String NAME_CANNOT_BE_BLANK = "Name cannot be blank.";
 private final String SPEED_CANNOT_BE_NEGATIVE = "Speed cannot be negative.";
-
+private final String DISTANCE_CANNOT_BE_NEGATIVE = "Distance cannot be negative.";
+private final String testNameHorse = "TestName";
+private final double testSpeed = 2.0;
+private final double testDistance = 1.0;
+private final Horse HORSE_TEST = new Horse(testNameHorse, testSpeed, testDistance);
 
     @Test
-    public void HorseConstructorNameTest() {
+    public void horseConstructorNameTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
-            Horse myObject = new Horse(null, 1, 1);
-            throw new IllegalArgumentException(NAME_CANNOT_BE_NULL);
+            new Horse(null, 1, 1);
         });
         assertEquals(NAME_CANNOT_BE_NULL, exception.getMessage());
-
     }
     @ParameterizedTest
-    @ValueSource(strings={"", " ", "\t"})
-    public void HorseConstructorNameParam(String argumentName) {
+    @ValueSource(strings={"", " ", "\t", "\n", "  "})
+    public void horseConstructorNameParam(String argumentName) {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
-            Horse myObject = new Horse(argumentName, 1, 1);
-            throw new IllegalArgumentException(NAME_CANNOT_BE_BLANK);
+            new Horse(argumentName, 1, 1);
         });
         assertEquals(NAME_CANNOT_BE_BLANK, exception.getMessage());
-
     }
     @ParameterizedTest
     @ValueSource(doubles = {-1.0, -99.99, -0.000001})
-    public void HorseConstructorSpeedParam(double argumentSpeed) {
+    public void horseConstructorSpeedParam(double argumentSpeed) {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
-            Horse myObject = new Horse("Name", argumentSpeed, 1);
-            throw new IllegalArgumentException(SPEED_CANNOT_BE_NEGATIVE);
+           new Horse("Name", argumentSpeed, 1);
         });
         assertEquals(SPEED_CANNOT_BE_NEGATIVE, exception.getMessage());
     }
     @ParameterizedTest
     @ValueSource(doubles = {-1.0, -99.99, -0.000001})
-    public void HorseConstructorDistanceParam(double argumentDistance) {
+    public void horseConstructorDistanceParam(double argumentDistance) {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
-            Horse myObject = new Horse("Name", 1, argumentDistance);
-            throw new IllegalArgumentException("Distance cannot be negative.");
+            new Horse("Name", 1, argumentDistance);
         });
-        assertEquals("Distance cannot be negative.", exception.getMessage());
+        assertEquals(DISTANCE_CANNOT_BE_NEGATIVE, exception.getMessage());
     }
-
     @Test
-    void testGetName() {
-        String expectedName = "Test Name";
-        Horse testHorse = new Horse(expectedName, 1, 1);
-        assertEquals(expectedName, testHorse.getName());
+    void testGetName() throws NoSuchFieldException, IllegalAccessException {
+        Field name = Horse.class.getDeclaredField("name");
+        name.setAccessible(true);
+        String expectedName = (String) name.get(HORSE_TEST);
+        assertEquals(testNameHorse, expectedName);
     }
     @Test
     void testGetSpeed() {
-        double expectedSpeed = 1.0;
-        Horse testHorse = new Horse("name", expectedSpeed, 1.0);
-        assertEquals(expectedSpeed, testHorse.getSpeed());
+        assertEquals(testSpeed, HORSE_TEST.getSpeed());
     }
     @Test
-    void testGetDistance() {
-        double expectedDistance = 1.0;
-        Horse testHorse = new Horse("name", 1.0, expectedDistance);
-        assertEquals(expectedDistance, testHorse.getDistance());
+    void testGetDistance() throws NoSuchFieldException, IllegalAccessException {
+        Field distance = Horse.class.getDeclaredField("distance");
+        distance.setAccessible(true);
+        double expectedDistance = (Double) distance.get(HORSE_TEST);
+        assertEquals(expectedDistance, testDistance);
     }
     @Test
     void testGetDistanceReturnNull() {

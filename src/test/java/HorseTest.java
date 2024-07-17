@@ -2,7 +2,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -13,14 +12,18 @@ import static org.mockito.Mockito.mockStatic;
 
 
 public class HorseTest {
+private final String NAME_CANNOT_BE_NULL = "Name cannot be null.";
+private final String NAME_CANNOT_BE_BLANK = "Name cannot be blank.";
+private final String SPEED_CANNOT_BE_NEGATIVE = "Speed cannot be negative.";
+
 
     @Test
-    public void HorseConstructorName() {
+    public void HorseConstructorNameTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
             Horse myObject = new Horse(null, 1, 1);
-            throw new IllegalArgumentException("Name cannot be null.");
+            throw new IllegalArgumentException(NAME_CANNOT_BE_NULL);
         });
-        assertEquals("Name cannot be null.", exception.getMessage());
+        assertEquals(NAME_CANNOT_BE_NULL, exception.getMessage());
 
     }
     @ParameterizedTest
@@ -28,9 +31,9 @@ public class HorseTest {
     public void HorseConstructorNameParam(String argumentName) {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
             Horse myObject = new Horse(argumentName, 1, 1);
-            throw new IllegalArgumentException("Name cannot be blank.");
+            throw new IllegalArgumentException(NAME_CANNOT_BE_BLANK);
         });
-        assertEquals("Name cannot be blank.", exception.getMessage());
+        assertEquals(NAME_CANNOT_BE_BLANK, exception.getMessage());
 
     }
     @ParameterizedTest
@@ -38,9 +41,9 @@ public class HorseTest {
     public void HorseConstructorSpeedParam(double argumentSpeed) {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
             Horse myObject = new Horse("Name", argumentSpeed, 1);
-            throw new IllegalArgumentException("Speed cannot be negative.");
+            throw new IllegalArgumentException(SPEED_CANNOT_BE_NEGATIVE);
         });
-        assertEquals("Speed cannot be negative.", exception.getMessage());
+        assertEquals(SPEED_CANNOT_BE_NEGATIVE, exception.getMessage());
     }
     @ParameterizedTest
     @ValueSource(doubles = {-1.0, -99.99, -0.000001})

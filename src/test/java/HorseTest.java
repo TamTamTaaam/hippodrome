@@ -85,8 +85,7 @@ private final Horse HORSE_TEST = new Horse(testNameHorse, testSpeed, testDistanc
         try (MockedStatic<Horse> mockedStatic = mockStatic(Horse.class)) {
             double param1 = 0.2;
             double param2 = 0.9;
-            Horse horseTest = new Horse("name", 1.0);
-            horseTest.move();
+            HORSE_TEST.move();
             mockedStatic.verify(() -> Horse.getRandomDouble(param1, param2));
         }
     }
@@ -94,11 +93,10 @@ private final Horse HORSE_TEST = new Horse(testNameHorse, testSpeed, testDistanc
     void testMoveAssignsCorrectDistanceValue() {
         try (MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)) {
             horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(0.5);
-            Horse horseTest = new Horse("name", 1.0, 1.0);
-            double distanceTest = horseTest.getDistance();
-            double expectedDistance =distanceTest+horseTest.getSpeed() * 0.5;
-            horseTest.move();
-            double actualDistance = distanceTest+horseTest.getSpeed()*0.5;
+            double distanceTest = HORSE_TEST.getDistance();
+            double expectedDistance =distanceTest+HORSE_TEST.getSpeed() * 0.5;
+            HORSE_TEST.move();
+            double actualDistance = distanceTest+HORSE_TEST.getSpeed()*0.5;
             assertEquals(expectedDistance, actualDistance);
         }
     }

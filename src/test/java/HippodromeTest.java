@@ -15,17 +15,14 @@ public class HippodromeTest {
    @Test
     public void hippodromeConstructorTest() {
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
-            Hippodrome myObject = new Hippodrome(null);
-            throw new IllegalArgumentException(HORSES_CANNOT_BE_NULL);
+           new Hippodrome(null);
         });
         assertEquals(HORSES_CANNOT_BE_NULL, exception.getMessage());
     }
     @Test
     public void hippodromeConstructorListTest() {
-        List<Horse> horsesListTest = new ArrayList<>();
         Throwable exception = assertThrows(IllegalArgumentException.class, ()-> {
-            Hippodrome myObject = new Hippodrome(horsesListTest);
-            throw new IllegalArgumentException(HORSES_CANNOT_BE_EMPTY);
+            new Hippodrome(new ArrayList<>());
         });
         assertEquals(HORSES_CANNOT_BE_EMPTY, exception.getMessage());
     }
@@ -37,25 +34,32 @@ public class HippodromeTest {
             horsesListTest.add(new Horse(name, i, i));
         }
         Hippodrome hippodromeTest = new Hippodrome(horsesListTest);
-        List<Horse> returnedList = hippodromeTest.getHorses();
-        assertIterableEquals(horsesListTest, returnedList);
+        assertIterableEquals(horsesListTest, hippodromeTest.getHorses());
     }
     @Test
     public void moveTest() throws Exception {
         List<Horse> mockHorses = new ArrayList<>();
         for(int i=0; i<50; i++) {
-            mockHorses.add(Mockito.spy(new Horse("name", i, i)));
+            mockHorses.add(mock(Horse.class));
         }
         Hippodrome hippodromeTest = new Hippodrome(mockHorses);
+
+        hippodromeTest.move();
+
         for (Horse horse : hippodromeTest.getHorses()) {
             verify(horse).move();
         }
 
     }
 
-   // Проверить, что метод вызывает метод move у всех лошадей.
+    // Проверить, что метод вызывает метод move у всех лошадей.
     // При создании объекта Hippodrome передай в конструктор список из 50 моков лошадей и воспользуйся методом verify
-//   public void move() {
-//       horses.forEach(Horse::move);
-//   }
+    //   public void move() {
+    //       horses.forEach(Horse::move);
+    //   }
+//     <dependency>
+//            <groupId>net.bytebuddy</groupId>
+//            <artifactId>byte-buddy</artifactId>
+//            <version>1.14.17</version>
+//        </dependency>
 }

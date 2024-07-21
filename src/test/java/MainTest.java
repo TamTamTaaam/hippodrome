@@ -8,7 +8,7 @@ public class MainTest {
     @Test
     @Timeout(value = 22, unit = TimeUnit.SECONDS)
     @Disabled
-    public void mainIfExecutionTimeTest() {
-
+    public void mainIfExecutionTimeTest() throws Exception {
+        Main.main(null);
     }
 }

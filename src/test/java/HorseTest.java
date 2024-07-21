@@ -96,8 +96,7 @@ private final Horse HORSE_TEST = new Horse(testNameHorse, testSpeed, testDistanc
             double distanceTest = HORSE_TEST.getDistance();
             double expectedDistance =distanceTest+HORSE_TEST.getSpeed() * 0.5;
             HORSE_TEST.move();
-            double actualDistance = distanceTest+HORSE_TEST.getSpeed()*0.5;
-            assertEquals(expectedDistance, actualDistance);
+            assertEquals(expectedDistance, HORSE_TEST.getDistance());
         }
     }
 

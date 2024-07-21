@@ -1,10 +1,11 @@
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@Log4j2
 public class Main {
+
+    private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
 

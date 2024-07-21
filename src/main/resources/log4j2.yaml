@@ -19,8 +19,8 @@ Loggers:
       - ref: File
   Logger:
     - name: hippodrome
-      level: info
-      additivity: true
+      level: debug
+      additivity: false
       AppenderRef:
         - ref: Console
         - ref: File

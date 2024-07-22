@@ -1,16 +1,13 @@
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@Log4j2
 public class Main {
-
-    private static final Logger log = org.apache.logging.log4j.LogManager.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
 
-        System.setProperty("log4j.configurationFile", "C:\\hippodrome\\src\\resources\\log4j2.yaml");
-        System.out.println(System.getProperty("log4j.configurationFile"));
         List<Horse> horses = List.of(
                 new Horse("Bucephalus", 2.4),
                 new Horse("Ace of Spades", 2.5),
@@ -23,7 +20,7 @@ public class Main {
         Hippodrome hippodrome = new Hippodrome(horses);
         log.info("Начало скачек. Количество участников: " + hippodrome.getHorses().size());
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 100; i++) {
             hippodrome.move();
             watch(hippodrome);
             TimeUnit.MILLISECONDS.sleep(200);

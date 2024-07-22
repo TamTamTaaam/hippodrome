@@ -1,26 +1,35 @@
-Appenders:
-  Console:
-    name: Console
-    target: SYSTEM_OUT
-    PatternLayout:
-      pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
-  File:
-    name: File
-    fileName: "C:/hippodrome/logs/hippodrome.log"
-    append: true
-    PatternLayout:
-      pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    RollingFile:
+      name: RollingFile
+      fileName: "logs/hippodrome.log"
+      filePattern: "logs/hippodrome-%d{yyyy-MM-dd}.log"
+      append: false
+      PatternLayout:
+        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+      Policies:
+        TimeBasedTriggeringPolicy:
+          interval: 1
+          modulate: true
+        SizeBasedTriggeringPolicy:
+          size: "10 MB"
+      DefaultRolloverStrategy:
+        max: "7"
+        Delete:
+          basePath: "logs/"
+          maxDepth: 1
+          IfLastModified:
+            age: 7d
 
-Loggers:
-  Root:
-    level: info
-    AppenderRef:
-      - ref: Console
-      - ref: File
-  Logger:
-    - name: hippodrome
+  Loggers:
+    Root:
       level: debug
-      additivity: false
       AppenderRef:
         - ref: Console
-        - ref: File
+        - ref: RollingFile
+
+

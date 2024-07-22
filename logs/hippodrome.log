@@ -1,10 +1,10 @@
-2024-07-21 21:15:26.089 [main] DEBUG hippodrome - Создание Horse, имя Bucephalus, скорость 2,4
-2024-07-21 21:15:26.094 [main] DEBUG hippodrome - Создание Horse, имя Ace of Spades, скорость 2,5
-2024-07-21 21:15:26.094 [main] DEBUG hippodrome - Создание Horse, имя Zephyr, скорость 2,6
-2024-07-21 21:15:26.094 [main] DEBUG hippodrome - Создание Horse, имя Blaze, скорость 2,7
-2024-07-21 21:15:26.095 [main] DEBUG hippodrome - Создание Horse, имя Lobster, скорость 2,8
-2024-07-21 21:15:26.095 [main] DEBUG hippodrome - Создание Horse, имя Pegasus, скорость 2,9
-2024-07-21 21:15:26.095 [main] DEBUG hippodrome - Создание Horse, имя Cherry, скорость 3,0
-2024-07-21 21:15:26.097 [main] DEBUG hippodrome - Hippodrome: Создание Hippodrome, лошадей [7]
-2024-07-21 21:15:26.097 [main] INFO  Main - Начало скачек. Количество участников: 7
-2024-07-21 21:15:26.917 [main] INFO  Main - Окончание скачек. Победитель: Lobster
+2024-07-22 20:00:32.946 [main] DEBUG hippodrome - Создание Horse, имя Bucephalus, скорость 2,4
+2024-07-22 20:00:32.951 [main] DEBUG hippodrome - Создание Horse, имя Ace of Spades, скорость 2,5
+2024-07-22 20:00:32.951 [main] DEBUG hippodrome - Создание Horse, имя Zephyr, скорость 2,6
+2024-07-22 20:00:32.951 [main] DEBUG hippodrome - Создание Horse, имя Blaze, скорость 2,7
+2024-07-22 20:00:32.952 [main] DEBUG hippodrome - Создание Horse, имя Lobster, скорость 2,8
+2024-07-22 20:00:32.952 [main] DEBUG hippodrome - Создание Horse, имя Pegasus, скорость 2,9
+2024-07-22 20:00:32.952 [main] DEBUG hippodrome - Создание Horse, имя Cherry, скорость 3,0
+2024-07-22 20:00:32.954 [main] DEBUG hippodrome - Hippodrome: Создание Hippodrome, лошадей [7]
+2024-07-22 20:00:32.955 [main] INFO  Main - Начало скачек. Количество участников: 7
+2024-07-22 20:00:33.784 [main] INFO  Main - Окончание скачек. Победитель: Lobster

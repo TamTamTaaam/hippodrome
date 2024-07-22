@@ -1,10 +1,9 @@
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import static java.util.Objects.isNull;
-
+@Log4j2
 public class Horse {
 
-    private static final Logger log = org.apache.logging.log4j.LogManager.getLogger("hippodrome");
     private final String name;
     private final double speed;
     private double distance;
